@@ -144,7 +144,7 @@ def train(epochs):
 			model.eval()
 			if not os.path.isdir('checkpoint'):
 			    os.mkdir('checkpoint')
-			#torch.save(model.state_dict(), './checkpoint/resnet34.pth')
+			torch.save(model.state_dict(), './checkpoint/resnet34.pth')
 
 	print("TRAINING IS FINISHED !!!")
 	return dict

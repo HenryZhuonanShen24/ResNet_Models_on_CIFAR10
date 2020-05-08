@@ -12,14 +12,6 @@ class Basic(nn.Module):
 		self.conv2 = nn.Conv2d(planes, planes, kernel_size=3, padding=1, bias=False)
 		self.bn2 = nn.BatchNorm2d(planes)
 
-		"""
-		self.shortcut = nn.Sequential()
-		if stride != 1 or in_planes != planes:
-			self.shortcut = nn.Sequential(
-				nn.Conv2d(in_planes, planes, kernel_size=1, stride=stride, bias=False),
-				nn.BatchNorm2d(planes)
-				)
-		"""
 		if stride != 1 or in_planes != planes:
 			self.flag = True
 		self.shortcut_conv = nn.Conv2d(in_planes, planes, kernel_size=1, stride=stride, bias=False)
@@ -30,7 +22,6 @@ class Basic(nn.Module):
 	def forward(self, x):
 		out = self.relu(self.bn1(self.conv1(x)))
 		out = self.bn2(self.conv2(out))
-		#out += self.shortcut(x)
 		if self.flag:
 			x = self.shortcut_bn(self.shortcut_conv(x))
 		out += x
