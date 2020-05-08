@@ -13,6 +13,7 @@ import matplotlib.pylab as plt2
 import os
 
 from resnet50 import ResNet50
+from resnet34 import ResNet34
 
 #Check GPU, connect to it if it is available 
 device = ''
@@ -47,11 +48,12 @@ def show_data(image):
 	plt.show()
 
 
-model = ResNet50()
+#model = ResNet50()
+model = ResNet34()
 model = model.to(device)
 print("Upload the model ...")
 assert os.path.isdir('checkpoint'), 'Error: no checkpoint directory found!'
-model.load_state_dict(torch.load('./checkpoint/resnet50.pth'))
+model.load_state_dict(torch.load('./checkpoint/resnet34.pth'))
 model.eval()
 
 
@@ -88,6 +90,8 @@ def test():
 acc1, acc5 = test()
 
 print("-------------------------")
-print("| TOP1 Accuracy:", format(acc1, '.4f'), "|")
-print("| TOP5 Accuracy:", format(acc5, '.4f'), "|")
+print("|       ResNet34       |")
+print("-------------------------")
+print("| TOP1 Accuracy:", format(100*acc1, '.4f'), "|")
+print("| TOP5 Accuracy:", format(100*acc5, '.4f'), "|")
 print("-------------------------\n")

@@ -59,35 +59,6 @@ def show_data(image):
 
 #show_data(train_data[0])
 
-#Temporary model
-class CNN_batch(nn.Module):
-  def __init__(self, out_1 = 16, out_2 = 32):
-    super(CNN_batch, self).__init__()
-    self.cnn1 = nn.Conv2d(in_channels=3, out_channels=out_1, kernel_size=5, stride=1, padding=2, bias=False)
-    self.bn_cnn1 = nn.BatchNorm2d(out_1)
-    self.maxpool1 = nn.MaxPool2d(kernel_size=2)
-
-    self.cnn2 = nn.Conv2d(in_channels=out_1, out_channels=out_2, kernel_size=5, stride=1, padding=2, bias=False)
-    self.bn_cnn2 = nn.BatchNorm2d(out_2)
-    self.maxpool2 = nn.MaxPool2d(kernel_size=2)
-
-    self.fc = nn.Linear(out_2*8*8, 10)
-
-  def forward(self,x):
-    x = self.cnn1(x)
-    x = self.bn_cnn1(x)
-    x = torch.relu(x)
-    x = self.maxpool1(x)
-
-    x = self.cnn2(x)
-    x = self.bn_cnn2(x)
-    x = torch.relu(x)
-    x = self.maxpool2(x)
-
-    x = x.view(x.size(0),-1)
-    x = self.fc(x)
-
-    return x
 
 #Need to import model a model
 #model = ResNet50()
@@ -103,6 +74,7 @@ length_train = len(train_data)
 length_validation = len(validation_data)
 #print(length_train)
 #print(len(train_loader))
+num_classes = 10
 
 #Training
 def train(epochs):
@@ -121,6 +93,7 @@ def train(epochs):
 			x, y = x.to(device), y.to(device)
 			optimizer.zero_grad()
 			yhat = model(x)
+			yhat = yhat.reshape(-1, 10)
 			loss = criterion(yhat, y)
 			loss.backward()
 			optimizer.step()
@@ -148,6 +121,7 @@ def train(epochs):
 				x, y = x.to(device), y.to(device)
 				model.eval()
 				yhat = model(x)
+				yhat = yhat.reshape(-1, 10)
 				loss = criterion(yhat, y)
 				cost += loss.item()
 				
@@ -170,7 +144,7 @@ def train(epochs):
 			model.eval()
 			if not os.path.isdir('checkpoint'):
 			    os.mkdir('checkpoint')
-			torch.save(model.state_dict(), './checkpoint/resnet34.pth')
+			#torch.save(model.state_dict(), './checkpoint/resnet34.pth')
 
 	print("TRAINING IS FINISHED !!!")
 	return dict

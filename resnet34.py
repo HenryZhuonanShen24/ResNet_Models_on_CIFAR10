@@ -4,23 +4,38 @@ import torch.nn as nn
 class Basic(nn.Module):
 	def __init__(self, in_planes, planes, stride):
 		super(Basic, self).__init__()
+		self.flag = False
+
 		self.conv1 = nn.Conv2d(in_planes, planes, kernel_size=3, stride=stride, padding=1,bias=False)
 		self.bn1 = nn.BatchNorm2d(planes)
 
 		self.conv2 = nn.Conv2d(planes, planes, kernel_size=3, padding=1, bias=False)
 		self.bn2 = nn.BatchNorm2d(planes)
 
+		"""
 		self.shortcut = nn.Sequential()
 		if stride != 1 or in_planes != planes:
 			self.shortcut = nn.Sequential(
 				nn.Conv2d(in_planes, planes, kernel_size=1, stride=stride, bias=False),
 				nn.BatchNorm2d(planes)
 				)
+		"""
+		if stride != 1 or in_planes != planes:
+			self.flag = True
+		self.shortcut_conv = nn.Conv2d(in_planes, planes, kernel_size=1, stride=stride, bias=False)
+		self.shortcut_bn = nn.BatchNorm2d(planes)
+
+		self.relu = torch.nn.ReLU(inplace=True)
 
 	def forward(self, x):
-		out = torch.relu(self.bn1(self.conv1(x)))
-		out = torch.relu(self.bn2(self.conv2(out)))
-		out += self.shortcut(x)
+		out = self.relu(self.bn1(self.conv1(x)))
+		out = self.bn2(self.conv2(out))
+		#out += self.shortcut(x)
+		if self.flag:
+			x = self.shortcut_bn(self.shortcut_conv(x))
+		out += x
+		out = self.relu(out)
+
 		return out
 
 
@@ -51,10 +66,11 @@ class ResNet34_class(nn.Module):
 		self.layer4_block3 = Basic(in_planes=512, planes=512, stride=1)
 
 		self.avg_pool = nn.AvgPool2d(kernel_size=4)
-		self.linear = nn.Linear(512, 10)
+		self.linear = nn.Conv2d(512, 10, kernel_size=1)
+		self.relu = torch.nn.ReLU(inplace=True)
 
 	def forward(self, x):
-		out = torch.relu(self.bn1(self.conv1(x)))
+		out = self.relu(self.bn1(self.conv1(x)))
 
 		out = self.layer1_block1(out)
 		out = self.layer1_block2(out)
@@ -77,7 +93,6 @@ class ResNet34_class(nn.Module):
 		out = self.layer4_block3(out)
 
 		out = self.avg_pool(out)
-		out = out.view(out.size(0),-1)
 		out = self.linear(out)
 
 		return out
