@@ -61,8 +61,8 @@ def show_data(image):
 
 
 #Need to import model a model
-#model = ResNet50()
-model = ResNet34()
+model = ResNet50()
+#model = ResNet34()
 #model = CNN_batch()
 #Pass model to GPU
 model = model.to(device)
@@ -144,13 +144,13 @@ def train(epochs):
 			model.eval()
 			if not os.path.isdir('checkpoint'):
 			    os.mkdir('checkpoint')
-			torch.save(model.state_dict(), './checkpoint/resnet34.pth')
+			torch.save(model.state_dict(), './checkpoint/resnet50.pth')
 
 	print("TRAINING IS FINISHED !!!")
 	return dict
 
 #Start training
-results = train(50)
+results = train(70)
 
 
 plt.figure(1)
@@ -160,7 +160,7 @@ plt.title("LOSS")
 plt.xlabel("Epochs")
 plt.ylabel("Loss")
 plt.legend(['training set', 'validation set'], loc='center right')
-plt.savefig('Loss_ResNet34.png', dpi=300, bbox_inches='tight')
+plt.savefig('Loss_ResNet50.png', dpi=300, bbox_inches='tight')
 
 plt.figure(2)
 plt.plot(results['Train Acc'], 'b', label = 'training accuracy')
@@ -169,7 +169,7 @@ plt.title("ACCURACY")
 plt.xlabel("Epochs")
 plt.ylabel("Accuracy")
 plt.legend(['training set', 'validation set'], loc='center right')
-plt.savefig('Accuracy_ResNet34.png', dpi=300, bbox_inches='tight')
+plt.savefig('Accuracy_ResNet50.png', dpi=300, bbox_inches='tight')
 plt.show()
 plt.close()
 

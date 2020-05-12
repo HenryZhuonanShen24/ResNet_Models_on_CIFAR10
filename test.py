@@ -48,12 +48,12 @@ def show_data(image):
 	plt.show()
 
 
-#model = ResNet50()
-model = ResNet34()
+model = ResNet50()
+#model = ResNet34()
 model = model.to(device)
 print("Upload the model ...")
 assert os.path.isdir('checkpoint'), 'Error: no checkpoint directory found!'
-model.load_state_dict(torch.load('./checkpoint/resnet34.pth'))
+model.load_state_dict(torch.load('./checkpoint/resnet50.pth'))
 model.eval()
 
 
@@ -80,6 +80,7 @@ def test():
 			x, y = x.to(device), y.to(device)
 			model.eval()
 			yhat = model(x)
+			yhat = yhat.reshape(-1, 10)
 			a1, a5 = accuracy(yhat, y, topk=(1,5))
 			accuracy1 += a1 
 			accuracy5 += a5
@@ -89,9 +90,9 @@ def test():
 
 acc1, acc5 = test()
 
-print("-------------------------")
-print("|       ResNet34       |")
-print("-------------------------")
+print("--------------------------")
+print("|       ResNet50         |")
+print("--------------------------")
 print("| TOP1 Accuracy:", format(100*acc1, '.4f'), "|")
 print("| TOP5 Accuracy:", format(100*acc5, '.4f'), "|")
-print("-------------------------\n")
+print("--------------------------\n")
