@@ -40,12 +40,12 @@ python3 test.py
 ```
 Model evaluation metrics are *TOP1 Accuracy* and *TOP5 Accuracy*.    
 **ResNet34**    
-*TOP1 Accuracy*: 91.25% 
-*TOP5 Accuracy*: 99.80%    
+- *TOP1 Accuracy*: 91.25%      
+- *TOP5 Accuracy*: 99.80%    
      
 
 **ResNet50 v1.5**    
-*TOP1 Accuracy*: 91.12% 
+*TOP1 Accuracy*: 91.12%     
 *TOP5 Accuracy*: 99.73%    
 
 
