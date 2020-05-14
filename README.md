@@ -39,14 +39,15 @@ SGD optmizer was used for training, with *learning_rate=0.01*, *momentum=0.9* an
 python3 test.py
 ```
 Model evaluation metrics are *TOP1 Accuracy* and *TOP5 Accuracy*.    
+    
 **ResNet34**    
 - *TOP1 Accuracy*: 91.25%      
 - *TOP5 Accuracy*: 99.80%    
      
 
 **ResNet50 v1.5**    
-*TOP1 Accuracy*: 91.12%     
-*TOP5 Accuracy*: 99.73%    
+- *TOP1 Accuracy*: 91.12%     
+- *TOP5 Accuracy*: 99.73%    
 
 
 
