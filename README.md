@@ -14,7 +14,7 @@ There are 2 convolutions in ResNet34 whereas in ResNet50 v1.5 there are 3 convol
 ResNet composed of 4 main groups of blocks. The difference between ResNet34 and ResNet50 is that first one has 34 layers and later has 50 layers. Moreover 
 the number blocks in group is different in each of them. The image below explains architecture of both models. Unlike original paper, we have stride=1 in first convolution 
 of a model and don't use pooling after that. Moreover first group of blocks uses only stride=1. First blocks of later groups has stride=2.
-This is done because input size of CIFAR-10 is **32x32** which is much smaller than size of ImageNet.
+This is done because input size of CIFAR-10 is ** 32x32 ** which is much smaller than size of ImageNet.
 <p align="center">
     <img src="assets/arch.PNG" width="500"/>
 </p>
@@ -23,7 +23,8 @@ This is done because input size of CIFAR-10 is **32x32** which is much smaller t
 ```
 python3 train.py
 ```
-SGD optmizer was used for training, with *learning_rate=0.01*, *momentum=0.9* and *weight_decay=5e-4*. Training is done for 70 epochs on NVIDIA RTX2070.   
+SGD optmizer was used for training with *learning_rate=0.01*, *momentum=0.9* and *weight_decay=5e-4*. Training is done for 70 epochs on NVIDIA RTX2070. Training time is approximatle 1 hour.    
+    
 **ResNet34**
 <p align="center">
 <img src = "assets/Accuracy_ResNet34.png" width ="350" /> <img src = "assets/Loss_ResNet34.png" width ="350" />
@@ -55,3 +56,10 @@ Model evaluation metrics are *TOP1 Accuracy* and *TOP5 Accuracy*.
 * PyTorch 1.5.0
 * Numpy 1.18.1
 * Matplotlib 3.1.1
+
+## PS.
+This is how full architecture of ResNet34 looks like. Take a look at resiadual connection between each block. ResNet50 v1.5 is similar, unless it is more deep(has more layers).
+<p align="center">
+    <img src="assets/ResNet34_architecture.PNG" width="500"/>
+</p>
+
