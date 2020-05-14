@@ -9,14 +9,14 @@ The problem with deep models was that they suffered from gradient vanishing prob
 Thus they were not able to learn anything at all. ResNet solves this problem with residual connection between blocks. Blocks are made from several convolutional layers.
 There are 2 convolutions in ResNet34 whereareas in ResNet50 v1.5 there are 2 convolutions. Take a look at image below.  
 <p align="center">
-    <img src="assets/block.png" width="220"/>
+    <img src="assets/block.PNG" width="220"/>
 </p>    
 ResNet composed of 4 main groups of blocks. The difference between ResNet34 and ResNet50 is that first one has 34 layers and later has 50 layers. Moreover 
 the number blocks in group is different in each of them. The image below explains architecture of both models. Unlike Original paper, we have stride=1 in forst convolution 
 of a model and don't use pooling after that. Moreover first group of blocks uses only stride=1. First blocks of later groups has stride=2.
 This is done because input size of CIFAR-10 is 32x32x3 which is much smaller than size of ImageNet.
 <p align="center">
-    <img src="assets/arch.png" width="220"/>
+    <img src="assets/arch.PNG" width="220"/>
 </p>
 
 ## Training
