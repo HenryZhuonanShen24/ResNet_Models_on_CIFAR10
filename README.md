@@ -7,17 +7,21 @@ In original paper model is trained on ImageNet dataset but my implementation is 
 ResNet is one of the models which revolutionized deep learning field. It is the first model which deep enough and was able to achieve high accuracy on Image Classification task.
 The problem with deep models was that they suffered from gradient vanishing problem, during backpropogation gradients of first layers were close to zero. 
 Thus they were not able to learn anything at all. ResNet solves this problem with residual connection between blocks. Blocks are made from several convolutional layers.
-There are 2 convolutions in ResNet34 whereas in ResNet50 v1.5 there are 3 convolutions. Take a look at image below.  
+There are 2 convolutions in ResNet34 whereas in ResNet50 v1.5 there are 3 convolutions. Take a look at image below.    
+    
 <p align="center">
     <img src="assets/block.PNG" width="550"/>
 </p>    
+    
 ResNet composed of 4 main groups of blocks. The difference between ResNet34 and ResNet50 is that first one has 34 layers and later has 50 layers. Moreover 
 the number blocks in group is different in each of them. The image below explains architecture of both models. Unlike original paper, we have *stride=1* in first convolution 
 of a model and don't use pooling after that. Moreover first group of blocks uses only *stride=1*. First blocks of later groups have stride=2.
-This is done because input size of CIFAR-10 is **32x32** which is much smaller than size of ImageNet. 
+This is done because input size of CIFAR-10 is **32x32** which is much smaller than size of ImageNet.    
+    
 <p align="center">
     <img src="assets/arch.PNG" width="450"/>
-</p>
+</p>    
+    
 The difference between ResNet50 and ResNet50 v1.5 is that in later's building block we use *stride=2* in the 3x3 convolution, instead of the first 1x1 convolution.   
 
 ## Training
