@@ -15,7 +15,7 @@ There are 2 convolutions in ResNet34 whereas in ResNet50 v1.5 there are 3 convol
     
 ResNet composed of 4 main groups of blocks. The difference between ResNet34 and ResNet50 is that first one has 34 layers and later has 50 layers. Moreover 
 the number blocks in group is different in each of them. The image below explains architecture of both models. Unlike original paper, we have *stride=1* in first convolution 
-of a model and don't use pooling after that. Moreover first group of blocks uses only *stride=1*. First blocks of later groups have stride=2.
+of a model and don't use pooling after that. Moreover first group of blocks uses only *stride=1*. First blocks of later groups have *stride=2*.
 This is done because input size of CIFAR-10 is **32x32** which is much smaller than size of ImageNet.    
     
 <p align="center">
