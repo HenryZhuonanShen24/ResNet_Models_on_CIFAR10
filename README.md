@@ -26,12 +26,12 @@ python3 train.py
 SGD optmizer was used for training, with *learning_rate=0.01*, *momentum=0.9* and *weight_decay=5e-4*. Training is done for 70 epochs on NVIDIA RTX2070.   
 **ResNet34**
 <p align="center">
-<img src = "assets/Accuracy_ResNet34.png" width ="350" /> <img src = "assets/Loss_ResNet34.png" width ="220" />
+<img src = "assets/Accuracy_ResNet34.png" width ="350" /> <img src = "assets/Loss_ResNet34.png" width ="350" />
 </p>        
 
 **ResNet50 v1.5**        
 <p align="center">
-<img src = "assets/Accuracy_ResNet50.png" width ="350" /> <img src = "assets/Loss_ResNet50.png" width ="220" />
+<img src = "assets/Accuracy_ResNet50.png" width ="350" /> <img src = "assets/Loss_ResNet50.png" width ="350" />
 </p>
 
 ## Testing
